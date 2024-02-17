@@ -14,11 +14,13 @@ namespace FirstWebApi.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly IAccountService accountService;
+        private IHttpContextAccessor httpContextAccessor;
 
-        public TestController(IConfiguration configuration, IAccountService accountService)
+        public TestController(IConfiguration configuration, IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             this.configuration = configuration;
             this.accountService = accountService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -59,5 +61,25 @@ namespace FirstWebApi.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePasswordAsync(PasswordChangeRequest request)
+        {
+
+            //if (!this.httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    return Unauthorized("You dont have access to change the password.");    
+            //}
+
+            if (request.ConfirmPassword != request.NewPassword)
+            {
+                return BadRequest("New password and confirm password not matched.");
+            }
+
+
+
+            await accountService.ChangePasswordAsync(request);
+            return Ok();
+        }
     }
 }

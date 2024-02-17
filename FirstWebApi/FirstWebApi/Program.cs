@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("Db1ConnectionString");
 builder.Services.AddSingleton<string>(connectionString);
+builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddControllers();
