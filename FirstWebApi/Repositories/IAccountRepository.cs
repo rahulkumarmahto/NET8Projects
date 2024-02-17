@@ -1,9 +1,8 @@
 ﻿using Dapper;
-using FirstWebApi.Models;
-using Microsoft.AspNetCore.Identity.Data;
+using Models;
 using System.Data;
 using System.Data.SqlClient;
-namespace FirstWebApi.Repositories
+namespace Repositories
 {
     public interface IAccountRepository
     {
@@ -22,16 +21,16 @@ namespace FirstWebApi.Repositories
 
         public async Task<LoginResponse> LoginAsync(Models.LoginRequest loginRequest)
         {
-            using IDbConnection connection = new SqlConnection(this.connectionString);
+            using IDbConnection connection = new SqlConnection(connectionString);
             var result = await connection.QueryFirstAsync<LoginResponse>("SP_GetLoginInfo", new { Username = loginRequest.UserName, password = loginRequest.Password }, null, null, CommandType.StoredProcedure).ConfigureAwait(false);
             return result;
         }
 
         public async Task ChangePasswordAsync(PasswordChangeRequest passwordChangeRequest)
         {
-            using IDbConnection connection = new SqlConnection(this.connectionString);
+            using IDbConnection connection = new SqlConnection(connectionString);
             var result = await connection.QueryFirstAsync<LoginResponse>("SP_UpdateLoginPasword", new { Username = passwordChangeRequest.UserName, password = passwordChangeRequest.NewPassword }, null, null, CommandType.StoredProcedure).ConfigureAwait(false);
-            
+
         }
     }
 }

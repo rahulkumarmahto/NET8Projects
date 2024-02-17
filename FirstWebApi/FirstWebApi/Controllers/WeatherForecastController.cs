@@ -1,5 +1,5 @@
-using FirstWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 namespace FirstWebApi.Controllers
 {

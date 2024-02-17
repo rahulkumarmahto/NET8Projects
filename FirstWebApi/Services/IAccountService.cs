@@ -1,7 +1,7 @@
-﻿using FirstWebApi.Models;
-using FirstWebApi.Repositories;
+﻿using Models;
+using Repositories;
 
-namespace FirstWebApi.Services
+namespace Services
 {
     public interface IAccountService
     {
@@ -21,7 +21,7 @@ namespace FirstWebApi.Services
 
         public async Task ChangePasswordAsync(PasswordChangeRequest passwordChangeRequest)
         {
-            await this.accountRepository.ChangePasswordAsync(passwordChangeRequest).ConfigureAwait(false);
+            await accountRepository.ChangePasswordAsync(passwordChangeRequest).ConfigureAwait(false);
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)

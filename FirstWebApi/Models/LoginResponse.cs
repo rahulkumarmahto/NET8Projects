@@ -1,4 +1,4 @@
-﻿namespace FirstWebApi.Models
+﻿namespace Models
 {
     public class LoginResponse
     {

@@ -1,5 +1,5 @@
-using FirstWebApi.Repositories;
-using FirstWebApi.Services;
+using Repositories;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

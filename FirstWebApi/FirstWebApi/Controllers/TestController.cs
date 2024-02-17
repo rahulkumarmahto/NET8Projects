@@ -1,10 +1,7 @@
-﻿using FirstWebApi.Models;
-using FirstWebApi.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Models;
+using Services;
 
 namespace FirstWebApi.Controllers
 {
@@ -75,8 +72,6 @@ namespace FirstWebApi.Controllers
             {
                 return BadRequest("New password and confirm password not matched.");
             }
-
-
 
             await accountService.ChangePasswordAsync(request);
             return Ok();
